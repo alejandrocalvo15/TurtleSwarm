@@ -1,3 +1,0 @@
-[console_scripts]
-keyboard_node = swarm_circles.keyboard_node:main
-swarm_node = swarm_circles.swarm_node:main
