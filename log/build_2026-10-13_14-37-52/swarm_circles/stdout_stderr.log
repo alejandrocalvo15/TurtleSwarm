@@ -1,0 +1,37 @@
+running egg_info
+creating ../../build/swarm_circles/swarm_circles.egg-info
+writing ../../build/swarm_circles/swarm_circles.egg-info/PKG-INFO
+writing dependency_links to ../../build/swarm_circles/swarm_circles.egg-info/dependency_links.txt
+writing entry points to ../../build/swarm_circles/swarm_circles.egg-info/entry_points.txt
+writing requirements to ../../build/swarm_circles/swarm_circles.egg-info/requires.txt
+writing top-level names to ../../build/swarm_circles/swarm_circles.egg-info/top_level.txt
+writing manifest file '../../build/swarm_circles/swarm_circles.egg-info/SOURCES.txt'
+reading manifest file '../../build/swarm_circles/swarm_circles.egg-info/SOURCES.txt'
+writing manifest file '../../build/swarm_circles/swarm_circles.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/gin/proyectos/ros2/TurtleSwarm/build/swarm_circles/build/lib/swarm_circles
+copying swarm_circles/swarm_node.py -> /home/gin/proyectos/ros2/TurtleSwarm/build/swarm_circles/build/lib/swarm_circles
+copying swarm_circles/__init__.py -> /home/gin/proyectos/ros2/TurtleSwarm/build/swarm_circles/build/lib/swarm_circles
+copying swarm_circles/keyboard_node.py -> /home/gin/proyectos/ros2/TurtleSwarm/build/swarm_circles/build/lib/swarm_circles
+running install
+running install_lib
+creating /home/gin/proyectos/ros2/TurtleSwarm/install/swarm_circles/lib/python3.14/site-packages/swarm_circles
+copying /home/gin/proyectos/ros2/TurtleSwarm/build/swarm_circles/build/lib/swarm_circles/swarm_node.py -> /home/gin/proyectos/ros2/TurtleSwarm/install/swarm_circles/lib/python3.14/site-packages/swarm_circles
+copying /home/gin/proyectos/ros2/TurtleSwarm/build/swarm_circles/build/lib/swarm_circles/__init__.py -> /home/gin/proyectos/ros2/TurtleSwarm/install/swarm_circles/lib/python3.14/site-packages/swarm_circles
+copying /home/gin/proyectos/ros2/TurtleSwarm/build/swarm_circles/build/lib/swarm_circles/keyboard_node.py -> /home/gin/proyectos/ros2/TurtleSwarm/install/swarm_circles/lib/python3.14/site-packages/swarm_circles
+byte-compiling /home/gin/proyectos/ros2/TurtleSwarm/install/swarm_circles/lib/python3.14/site-packages/swarm_circles/swarm_node.py to swarm_node.cpython-314.pyc
+byte-compiling /home/gin/proyectos/ros2/TurtleSwarm/install/swarm_circles/lib/python3.14/site-packages/swarm_circles/__init__.py to __init__.cpython-314.pyc
+byte-compiling /home/gin/proyectos/ros2/TurtleSwarm/install/swarm_circles/lib/python3.14/site-packages/swarm_circles/keyboard_node.py to keyboard_node.cpython-314.pyc
+running install_data
+creating /home/gin/proyectos/ros2/TurtleSwarm/install/swarm_circles/share/ament_index/resource_index/packages
+copying resource/swarm_circles -> /home/gin/proyectos/ros2/TurtleSwarm/install/swarm_circles/share/ament_index/resource_index/packages
+copying package.xml -> /home/gin/proyectos/ros2/TurtleSwarm/install/swarm_circles/share/swarm_circles
+creating /home/gin/proyectos/ros2/TurtleSwarm/install/swarm_circles/share/swarm_circles/launch
+copying launch/swarm.launch.py -> /home/gin/proyectos/ros2/TurtleSwarm/install/swarm_circles/share/swarm_circles/launch
+running install_egg_info
+Copying ../../build/swarm_circles/swarm_circles.egg-info to /home/gin/proyectos/ros2/TurtleSwarm/install/swarm_circles/lib/python3.14/site-packages/swarm_circles-0.1.0-py3.14.egg-info
+running install_scripts
+Installing keyboard_node script to /home/gin/proyectos/ros2/TurtleSwarm/install/swarm_circles/lib/swarm_circles
+Installing swarm_node script to /home/gin/proyectos/ros2/TurtleSwarm/install/swarm_circles/lib/swarm_circles
+writing list of installed files to '/home/gin/proyectos/ros2/TurtleSwarm/build/swarm_circles/install.log'
