@@ -6,7 +6,6 @@ from rclpy.node import Node
 from rclpy.parameter import Parameter
 from rcl_interfaces.msg import ParameterDescriptor, SetParametersResult
 from geometry_msgs.msg import Twist
-from sensor_msgs.msg import Joy
 from std_msgs.msg import String
 from std_srvs.srv import Empty
 from turtlesim.msg import Pose
@@ -60,7 +59,6 @@ class SwarmNode(Node):
         self.axes = (0.0, 0.0)
         self.prev_buttons = []
 
-        self.create_subscription(Joy, '/joy', self._on_joy, 10)
         self.create_subscription(String, '/swarm/command', self._on_command, 10)
         self.clear_cli = self.create_client(Empty, '/clear')
 
@@ -69,7 +67,7 @@ class SwarmNode(Node):
         dt = 1.0 / self.get_parameter('rate').value
         self.dt = dt
         self.create_timer(dt, self._loop)
-        self.get_logger().info('Swarm ready. Use params, /joy, or the keyboard_node.')
+        self.get_logger().info('Listo')
 
     # ---------- setup ----------
     def _setup_turtles(self):
