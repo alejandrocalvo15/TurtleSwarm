@@ -62,7 +62,7 @@ class SwarmNode(Node):
         self.declare_parameter("radius", DEFAULTS["radius"], dyn)
         self.declare_parameter("angular_speed", DEFAULTS["angular_speed"], dyn)
         self.declare_parameter("direction", DEFAULTS["direction"], dyn)
-        self.declare_parameter("shape", "circle")
+        self.declare_parameter("shape", "circulo")
 
         self.declare_parameter("center_x", 5.544445)
         self.declare_parameter("center_y", 5.544445)
@@ -120,7 +120,7 @@ class SwarmNode(Node):
             try:
                 if p.name == "shape" and p.value not in SHAPES:
                     return SetParametersResult(
-                        succesful=False, reason="shape must be on list"
+                        successful=False, reason="shape must be on list"
                     )
                 if (
                     p.name == "radius"

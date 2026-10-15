@@ -14,6 +14,7 @@ Swarm keyboard control
   f     : cambiar dirección
   c     : clear
   r     : default
+  n     : siguiente forma
   q     : salir
 """
 
@@ -23,7 +24,7 @@ KEYMAP = {
     "d": "speed+",
     "a": "speed-",
     "f": "flip",
-    " ": "flip",
+    "n": "shape+",
     "c": "clear",
     "r": "reset",
 }
