@@ -24,6 +24,21 @@ SPAWN = {
     "turtle4": (5.5, 7.5),
 }
 
+SHAPES = {
+    "circulo": lambda a, R: (R * math.cos(a), R * math.sin(a)),
+    "elipse": lambda a, R: (R * math.cos(a), 0.5 * R * math.sin(a)),
+    "8": lambda a, R: (R * math.sin(a), R * math.sin(a) * math.cos(a)),
+    "lissajous": lambda a, R: (R * math.sin(3 * a), R * math.sin(2 * a)),
+    "rosa": lambda a, R: (
+        R * math.cos(3 * a) * math.cos(a),
+        R * math.cos(3 * a) * math.sin(a),
+    ),
+    "spira": lambda a, R: (
+        (2 * math.cos(a) + 5 * math.cos(2 * a / 3)) * R / 7,
+        (2 * math.sin(a) - 5 * math.sin(2 * a / 3)) * R / 7,
+    ),
+}
+
 RADIUS_LIMITS = (0.3, 5.0)
 SPEED_LIMITS = (0.0, 3.0)
 DEFAULTS = {"radius": 2.5, "angular_speed": 0.8, "direction": 1}
@@ -47,6 +62,7 @@ class SwarmNode(Node):
         self.declare_parameter("radius", DEFAULTS["radius"], dyn)
         self.declare_parameter("angular_speed", DEFAULTS["angular_speed"], dyn)
         self.declare_parameter("direction", DEFAULTS["direction"], dyn)
+        self.declare_parameter("shape", "circle")
 
         self.declare_parameter("center_x", 5.544445)
         self.declare_parameter("center_y", 5.544445)
@@ -102,6 +118,10 @@ class SwarmNode(Node):
     def _validate(self, params):
         for p in params:
             try:
+                if p.name == "shape" and p.value not in SHAPES:
+                    return SetParametersResult(
+                        succesful=False, reason="shape must be on list"
+                    )
                 if (
                     p.name == "radius"
                     and not RADIUS_LIMITS[0] <= float(p.value) <= RADIUS_LIMITS[1]
@@ -167,16 +187,23 @@ class SwarmNode(Node):
             self._flip()
         elif cmd == "clear":
             self._clear()
+        elif cmd == "shape+":
+            keys = list(SHAPES)
+            nxt = keys[(keys.index(self._get("shape")) + 1) % len(keys)]
+            self.set_parameters([Parameter("shape", Parameter.Type.STRING, nxt)])
+            self._clear()
         elif cmd == "reset":
             self._reset()
 
-    # ---------- control círculo ----------
+    # ---------- control loop ----------
     def _loop(self):
+        f = SHAPES[self._get("shape")]
         R = float(self._get("radius"))
         w = float(self._get("angular_speed"))
         d = int(self._get("direction"))
         cx, cy = self._get("center_x"), self._get("center_y")
         kp, kw, vmax = self._get("kp"), self._get("kw"), self._get("max_linear")
+        eps = 1e-4
 
         self.phase += d * w * self.dt
 
@@ -186,9 +213,15 @@ class SwarmNode(Node):
                 continue
             a = self.phase + i * 2.0 * math.pi / len(NAMES)
 
-            # virtual target position and velocity
-            tx, ty = cx + R * math.cos(a), cy + R * math.sin(a)
-            tvx, tvy = -d * w * R * math.sin(a), d * w * R * math.cos(a)
+            # virtual target position (now inside the loop, after `a` exists)
+            ox, oy = f(a, R)
+            tx, ty = cx + ox, cy + oy
+
+            # target velocity by numeric derivative
+            x1, y1 = f(a + eps, R)
+            x0, y0 = f(a - eps, R)
+            tvx = d * w * (x1 - x0) / (2 * eps)
+            tvy = d * w * (y1 - y0) / (2 * eps)
 
             # desired velocity = feedforward + position correction
             dvx = tvx + kp * (tx - pose.x)
@@ -201,9 +234,6 @@ class SwarmNode(Node):
                 cmd.linear.x = min(vmax, speed * max(0.0, math.cos(err)))
                 cmd.angular.z = kw * err
             self.pubs[name].publish(cmd)
-
-
-# ---------- control cuadrado ----------
 
 
 def main():
