@@ -12,7 +12,6 @@
   <depend>std_srvs</depend>
   <depend>sensor_msgs</depend>
   <depend>turtlesim</depend>
-  <exec_depend>joy</exec_depend>
   <exec_depend>ros2launch</exec_depend>
 
   <export>
